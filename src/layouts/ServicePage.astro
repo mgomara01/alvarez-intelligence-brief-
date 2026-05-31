@@ -1,0 +1,95 @@
+---
+import BaseLayout from './BaseLayout.astro';
+import FAQ from '../components/FAQ.astro';
+import LeadForm from '../components/LeadForm.astro';
+import { SITE, BUSINESS } from '../site.config';
+import type { Service, ServiceArea } from '../site.config';
+import { canonical } from '../lib/seo';
+import { serviceSchema, faqSchema, breadcrumbSchema } from '../lib/schema';
+
+interface Props {
+  service: Service;
+  area?: ServiceArea;
+  metaTitle: string;
+  metaDescription: string;
+  h1: string;
+  faqs?: Array<{ question: string; answer: string }>;
+}
+const { service, area, metaTitle, metaDescription, h1, faqs = [] } = Astro.props;
+
+const path = area
+  ? `/services/${service.slug}/${area.slug}`
+  : `/services/${service.slug}`;
+const url = canonical(path);
+const where = area ? `${area.city}, ${area.region}` : 'your area';
+
+const crumbs = [
+  { name: 'Home', url: SITE.url },
+  { name: 'Services', url: canonical('/services') },
+  { name: service.name, url: canonical(`/services/${service.slug}`) },
+];
+if (area) crumbs.push({ name: area.city, url });
+
+const schemas = [
+  serviceSchema({ serviceName: service.name, description: metaDescription, url, areaServed: area?.city }),
+  breadcrumbSchema(crumbs),
+  faqSchema(faqs),
+].filter(Boolean) as Array<Record<string, unknown>>;
+---
+<BaseLayout title={metaTitle} description={metaDescription} path={path} schemas={schemas}>
+  <section class="svc-hero">
+    <div class="container">
+      <nav class="crumbs" aria-label="Breadcrumb">
+        <a href="/services">Services</a> / <span>{service.name}</span>
+      </nav>
+      <span class="eyebrow">{service.category.toUpperCase()} · {area ? where : 'All service areas'}</span>
+      <!-- Exactly one H1, with the primary money keyword. -->
+      <h1>{h1}</h1>
+      <p class="svc-hero__blurb">{service.blurb}</p>
+      <div class="svc-hero__cta">
+        <a href="#contact" class="btn">Get a free quote</a>
+        <a href={`tel:${BUSINESS.phone}`} class="btn btn--ghost">Call {BUSINESS.phoneDisplay}</a>
+      </div>
+      <p class="muted svc-hero__trust">
+        ★ {BUSINESS.rating}/5 ({BUSINESS.reviewCount.toLocaleString()} reviews) · {BUSINESS.emergencyLine}
+      </p>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="container prose">
+      <slot>
+        <!-- Default body when no custom markdown override exists. -->
+        <p>
+          When you need <strong>{service.name.toLowerCase()}</strong> in {where}, you want someone who picks up
+          the phone, shows up when they say they will, and quotes the price before the work starts — not after.
+          That's the whole job at {SITE.name}.
+        </p>
+        <h2>Why {where} homeowners and businesses call us</h2>
+        <ul>
+          <li><strong>{BUSINESS.yearsInBusiness}+ years</strong> and {BUSINESS.jobsCompleted} jobs across the region.</li>
+          <li>Upfront, flat-rate pricing — no surprise line items.</li>
+          <li>Licensed, insured technicians for both residential and commercial work.</li>
+          <li>{BUSINESS.emergencyLine}.</li>
+        </ul>
+        <h2>Our {service.name.toLowerCase()} process</h2>
+        <ol>
+          <li>You call or fill out the form — we confirm the details and book a window.</li>
+          <li>We diagnose the real problem (and show you), then quote it flat-rate.</li>
+          <li>We do the work right the first time and stand behind it.</li>
+        </ol>
+      </slot>
+    </div>
+  </section>
+
+  <FAQ faqs={faqs} />
+  <LeadForm service={service.name} city={area?.city} />
+</BaseLayout>
+
+<style>
+  .svc-hero { background: var(--surface); padding: 3rem 0 2.5rem; }
+  .crumbs { font-size: 0.9rem; margin-bottom: 0.75rem; }
+  .svc-hero__blurb { font-size: 1.2rem; max-width: 60ch; }
+  .svc-hero__cta { display: flex; gap: 0.8rem; flex-wrap: wrap; margin: 1.2rem 0 0.8rem; }
+  .svc-hero__trust { margin: 0; }
+</style>

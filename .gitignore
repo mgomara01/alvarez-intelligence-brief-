@@ -1,0 +1,22 @@
+# build output
+dist/
+.astro/
+
+# dependencies
+node_modules/
+
+# secrets — never commit real keys
+.env
+.env.local
+.env.*.local
+
+# generated content-engine artifacts (keep .csv inputs, ignore derived JSON)
+data/*.winners.json
+data/*.clusters.json
+src/assets/pexels/
+
+# logs / OS
+*.log
+npm-debug.log*
+.DS_Store
+Thumbs.db

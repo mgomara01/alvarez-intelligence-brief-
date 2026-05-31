@@ -1,0 +1,28 @@
+{
+  "name": "seo-masterclass-site",
+  "version": "1.0.0",
+  "type": "module",
+  "description": "Static, SEO-optimized site + content engine for local HVAC & plumbing (residential + commercial).",
+  "scripts": {
+    "dev": "astro dev",
+    "build": "astro build",
+    "preview": "astro preview",
+    "astro": "astro",
+    "kw:filter": "tsx scripts/filter-keywords.ts",
+    "kw:cluster": "tsx scripts/cluster-keywords.ts",
+    "img:fetch": "tsx scripts/fetch-images.ts",
+    "serp:analyze": "tsx scripts/serp-analyze.ts",
+    "new:blog": "tsx scripts/new-blog.ts",
+    "new:service": "tsx scripts/new-service.ts",
+    "seo:audit": "tsx scripts/seo-audit.ts"
+  },
+  "dependencies": {
+    "@astrojs/rss": "^4.0.11",
+    "@astrojs/sitemap": "^3.2.1",
+    "astro": "^5.2.5"
+  },
+  "devDependencies": {
+    "tsx": "^4.19.2",
+    "typescript": "^5.7.3"
+  }
+}

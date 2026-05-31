@@ -1,0 +1,119 @@
+---
+import { getCollection } from 'astro:content';
+import BaseLayout from '../layouts/BaseLayout.astro';
+import PostCard from '../components/PostCard.astro';
+import LeadForm from '../components/LeadForm.astro';
+import { SITE, BUSINESS, SERVICES } from '../site.config';
+
+const posts = (await getCollection('blog', ({ data }) => !data.draft))
+  .sort((a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf())
+  .slice(0, 3);
+
+const hvac = SERVICES.filter((s) => s.category === 'hvac');
+const plumbing = SERVICES.filter((s) => s.category === 'plumbing');
+---
+<BaseLayout
+  title={`${SITE.name} — HVAC & Plumbing`}
+  description={SITE.description}
+  path="/"
+>
+  <!-- HERO -->
+  <section class="hero">
+    <div class="container hero__inner">
+      <div>
+        <span class="eyebrow">Residential &amp; commercial · {BUSINESS.address.region}</span>
+        <h1>{SITE.tagline}</h1>
+        <p class="hero__sub">
+          Licensed HVAC and plumbing pros who show up on time, quote upfront, and fix it right.
+          {BUSINESS.emergencyLine}.
+        </p>
+        <div class="hero__cta">
+          <a href="#contact" class="btn">Get a free quote</a>
+          <a href={`tel:${BUSINESS.phone}`} class="btn btn--ghost">Call {BUSINESS.phoneDisplay}</a>
+        </div>
+        <p class="muted hero__trust">
+          ★ {BUSINESS.rating}/5 · {BUSINESS.reviewCount.toLocaleString()} reviews ·
+          {BUSINESS.jobsCompleted} jobs · {BUSINESS.yearsInBusiness} years
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <!-- SERVICES -->
+  <section class="section" id="services">
+    <div class="container">
+      <h2>What we do</h2>
+      <div class="svc-cols">
+        <div>
+          <h3>Heating &amp; Cooling (HVAC)</h3>
+          <ul class="svc-list">
+            {hvac.map((s) => (
+              <li><a href={`/services/${s.slug}`}>{s.name}</a> — <span class="muted">{s.blurb}</span></li>
+            ))}
+          </ul>
+        </div>
+        <div>
+          <h3>Plumbing</h3>
+          <ul class="svc-list">
+            {plumbing.map((s) => (
+              <li><a href={`/services/${s.slug}`}>{s.name}</a> — <span class="muted">{s.blurb}</span></li>
+            ))}
+          </ul>
+        </div>
+      </div>
+      <p><a href="/services" class="btn btn--ghost">See all services &amp; areas →</a></p>
+    </div>
+  </section>
+
+  <!-- ABOUT -->
+  <section class="section section--surface" id="about">
+    <div class="container prose">
+      <h2>Why {SITE.name}</h2>
+      <p>
+        We've spent {BUSINESS.yearsInBusiness} years doing one thing: making the heating, cooling, and plumbing
+        in {BUSINESS.address.city} and the surrounding cities just <em>work</em> — for families and for businesses.
+        {BUSINESS.jobsCompleted} jobs later, the formula hasn't changed: answer the phone, show up, quote it
+        straight, and stand behind the work.
+      </p>
+    </div>
+  </section>
+
+  <!-- LATEST POSTS -->
+  {posts.length > 0 && (
+    <section class="section" id="blog">
+      <div class="container">
+        <h2>From the blog</h2>
+        <div class="grid grid--3">
+          {posts.map((post) => (
+            <PostCard
+              href={`/blog/${post.id}`}
+              title={post.data.title}
+              description={post.data.description}
+              pubDate={post.data.pubDate}
+              image={post.data.heroImage}
+              imageAlt={post.data.heroImageAlt}
+              tags={post.data.tags}
+            />
+          ))}
+        </div>
+        <p><a href="/blog" class="btn btn--ghost">Read the blog →</a></p>
+      </div>
+    </section>
+  )}
+
+  <LeadForm heading="Ready when you are. Get a free quote today." />
+</BaseLayout>
+
+<style>
+  .hero { background: linear-gradient(135deg, #0b5cab 0%, #08427b 100%); color: #fff; padding: 4rem 0; }
+  .hero h1 { color: #fff; max-width: 18ch; }
+  .hero__sub { font-size: 1.2rem; max-width: 55ch; color: #dbe7f5; }
+  .hero__cta { display: flex; gap: 0.8rem; flex-wrap: wrap; margin: 1.4rem 0 0.8rem; }
+  .hero .btn--ghost { color: #fff; border-color: #fff; }
+  .hero .btn--ghost:hover { background: #fff; color: var(--brand-dark); }
+  .hero__trust { color: #bcd2ec; margin: 0; }
+  .svc-cols { display: grid; grid-template-columns: 1fr 1fr; gap: 2rem; }
+  .svc-list { list-style: none; padding: 0; }
+  .svc-list li { padding: 0.45rem 0; border-bottom: 1px solid var(--border); }
+  @media (max-width: 720px) { .svc-cols { grid-template-columns: 1fr; } }
+</style>

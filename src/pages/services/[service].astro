@@ -1,0 +1,41 @@
+---
+import { getCollection, render } from 'astro:content';
+import type { GetStaticPaths } from 'astro';
+import ServicePage from '../../layouts/ServicePage.astro';
+import { SERVICES } from '../../site.config';
+import {
+  serviceH1,
+  serviceMetaTitle,
+  serviceMetaDescription,
+  defaultServiceFaqs,
+} from '../../lib/content';
+
+// One page per service (the non-localized "hub" page, e.g. /services/drain-cleaning).
+export const getStaticPaths = (async () => {
+  return SERVICES.map((service) => ({
+    params: { service: service.slug },
+    props: { service },
+  }));
+}) satisfies GetStaticPaths;
+
+const { service } = Astro.props;
+
+// Optional hand-tuned markdown override (areaSlug undefined = the hub page).
+const overrides = await getCollection(
+  'services',
+  ({ data }) => data.serviceSlug === service.slug && !data.areaSlug
+);
+const override = overrides[0];
+const Content = override ? (await render(override)).Content : null;
+
+const faqs = override?.data.faqs?.length ? override.data.faqs : defaultServiceFaqs(service);
+---
+<ServicePage
+  service={service}
+  metaTitle={override?.data.metaTitle ?? serviceMetaTitle(service)}
+  metaDescription={override?.data.metaDescription ?? serviceMetaDescription(service)}
+  h1={serviceH1(service)}
+  faqs={faqs}
+>
+  {Content && <Content />}
+</ServicePage>

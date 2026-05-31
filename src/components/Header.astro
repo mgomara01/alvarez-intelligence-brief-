@@ -1,0 +1,50 @@
+---
+import { SITE, BUSINESS, NAV } from '../site.config';
+---
+<header class="site-header">
+  <div class="container site-header__inner">
+    <a href="/" class="brand" aria-label={`${SITE.name} home`}>
+      <span class="brand__mark" aria-hidden="true">❄</span>
+      <span class="brand__name">{SITE.name}</span>
+    </a>
+
+    <nav class="nav" aria-label="Primary">
+      <input type="checkbox" id="nav-toggle" class="nav__checkbox" />
+      <label for="nav-toggle" class="nav__burger" aria-label="Toggle menu">☰</label>
+      <ul class="nav__list">
+        {NAV.map((item) => (
+          <li><a href={item.href}>{item.label}</a></li>
+        ))}
+        <li>
+          <a class="btn btn--header" href={`tel:${BUSINESS.phone}`}>
+            Call {BUSINESS.phoneDisplay}
+          </a>
+        </li>
+      </ul>
+    </nav>
+  </div>
+</header>
+
+<style>
+  .site-header { position: sticky; top: 0; z-index: 50; background: #fff; border-bottom: 1px solid var(--border); }
+  .site-header__inner { display: flex; align-items: center; justify-content: space-between; min-height: 68px; }
+  .brand { display: flex; align-items: center; gap: 0.5rem; font-weight: 800; color: var(--brand-dark); }
+  .brand:hover { text-decoration: none; }
+  .brand__mark { color: var(--brand); font-size: 1.4rem; }
+  .nav__list { display: flex; align-items: center; gap: 1.5rem; list-style: none; margin: 0; padding: 0; }
+  .nav__list a { color: var(--fg); font-weight: 600; }
+  .nav__checkbox, .nav__burger { display: none; }
+  .btn--header { padding: 0.55rem 1rem; font-size: 0.95rem; }
+
+  @media (max-width: 820px) {
+    .nav__burger { display: block; font-size: 1.6rem; cursor: pointer; }
+    .nav__list {
+      position: absolute; top: 68px; left: 0; right: 0;
+      flex-direction: column; align-items: flex-start; gap: 0;
+      background: #fff; border-bottom: 1px solid var(--border); padding: 0.5rem 1.25rem;
+    }
+    .nav__list { display: none; }
+    .nav__checkbox:checked ~ .nav__list { display: flex; }
+    .nav__list li { width: 100%; padding: 0.6rem 0; }
+  }
+</style>

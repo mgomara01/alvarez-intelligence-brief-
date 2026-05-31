@@ -1,0 +1,55 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import LeadForm from '../../components/LeadForm.astro';
+import { SITE, SERVICES, SERVICE_AREAS } from '../../site.config';
+
+// Service INDEX: lists every service, and under each, the cities we serve
+// (the "zipper" laid out for both humans and crawlers / internal linking).
+const hvac = SERVICES.filter((s) => s.category === 'hvac');
+const plumbing = SERVICES.filter((s) => s.category === 'plumbing');
+---
+<BaseLayout
+  title="HVAC & Plumbing Services"
+  description={`Every service ${SITE.name} offers across ${SERVICE_AREAS.map((a) => a.city).join(', ')} — residential and commercial.`}
+  path="/services"
+>
+  <section class="section">
+    <div class="container">
+      <span class="eyebrow">Services</span>
+      <h1>HVAC &amp; plumbing services, residential and commercial</h1>
+      <p class="muted" style="max-width:60ch;">Pick a service to see details, pricing guidance, and book in your city.</p>
+
+      {[['Heating & Cooling (HVAC)', hvac], ['Plumbing', plumbing]].map(([label, list]) => (
+        <div class="svc-block">
+          <h2>{label}</h2>
+          <div class="grid grid--3">
+            {(list as typeof SERVICES).map((s) => (
+              <div class="card">
+                <span class="eyebrow">{s.segment === 'both' ? 'Residential & Commercial' : s.segment}</span>
+                <h3><a href={`/services/${s.slug}`}>{s.name}</a></h3>
+                <p class="muted">{s.blurb}</p>
+                {s.localize && (
+                  <p class="svc-cities muted">
+                    {SERVICE_AREAS.map((a, i) => (
+                      <>
+                        {i > 0 && ' · '}
+                        <a href={`/services/${s.slug}/${a.slug}`}>{a.city}</a>
+                      </>
+                    ))}
+                  </p>
+                )}
+              </div>
+            ))}
+          </div>
+        </div>
+      ))}
+    </div>
+  </section>
+
+  <LeadForm heading="Not sure what you need? Tell us the symptom." />
+</BaseLayout>
+
+<style>
+  .svc-block { margin-top: 2rem; }
+  .svc-cities { font-size: 0.85rem; margin-top: 0.6rem; }
+</style>

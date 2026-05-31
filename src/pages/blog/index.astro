@@ -1,0 +1,48 @@
+---
+import { getCollection } from 'astro:content';
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import PostCard from '../../components/PostCard.astro';
+import { SITE } from '../../site.config';
+
+// Blog INDEX: lists every published post (this is the "index page" the video
+// describes). One card per post, newest first.
+const posts = (await getCollection('blog', ({ data }) => !data.draft)).sort(
+  (a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf()
+);
+---
+<BaseLayout
+  title="HVAC & Plumbing Tips, Guides & Costs"
+  description={`Straight-talking guides on heating, cooling, and plumbing from the ${SITE.name} crew — what things cost, when to DIY, and when to call.`}
+  path="/blog"
+>
+  <section class="section">
+    <div class="container">
+      <span class="eyebrow">The Blog</span>
+      <h1>HVAC &amp; plumbing, explained without the snooze</h1>
+      <p class="muted" style="max-width:60ch;">
+        Real answers on costs, repairs, and "is this an emergency?" — written by people who actually do the work.
+      </p>
+
+      {posts.length === 0 ? (
+        <p class="muted">No posts yet. Run <code>npm run new:blog</code> to create your first one.</p>
+      ) : (
+        <>
+        <h2>Latest guides</h2>
+        <div class="grid grid--3" style="margin-top:1.5rem;">
+          {posts.map((post) => (
+            <PostCard
+              href={`/blog/${post.id}`}
+              title={post.data.title}
+              description={post.data.description}
+              pubDate={post.data.pubDate}
+              image={post.data.heroImage}
+              imageAlt={post.data.heroImageAlt}
+              tags={post.data.tags}
+            />
+          ))}
+        </div>
+        </>
+      )}
+    </div>
+  </section>
+</BaseLayout>

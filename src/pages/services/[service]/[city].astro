@@ -1,0 +1,42 @@
+---
+import { getCollection, render } from 'astro:content';
+import type { GetStaticPaths } from 'astro';
+import ServicePage from '../../../layouts/ServicePage.astro';
+import { getLocalizedPairs } from '../../../site.config';
+import {
+  serviceH1,
+  serviceMetaTitle,
+  serviceMetaDescription,
+  defaultServiceFaqs,
+} from '../../../lib/content';
+
+// The "zipper": one page per (localizable service x service-area) pair,
+// e.g. /services/emergency-plumber/toronto. These target the money keywords.
+export const getStaticPaths = (async () => {
+  return getLocalizedPairs().map(({ service, area }) => ({
+    params: { service: service.slug, city: area.slug },
+    props: { service, area },
+  }));
+}) satisfies GetStaticPaths;
+
+const { service, area } = Astro.props;
+
+const overrides = await getCollection(
+  'services',
+  ({ data }) => data.serviceSlug === service.slug && data.areaSlug === area.slug
+);
+const override = overrides[0];
+const Content = override ? (await render(override)).Content : null;
+
+const faqs = override?.data.faqs?.length ? override.data.faqs : defaultServiceFaqs(service, area);
+---
+<ServicePage
+  service={service}
+  area={area}
+  metaTitle={override?.data.metaTitle ?? serviceMetaTitle(service, area)}
+  metaDescription={override?.data.metaDescription ?? serviceMetaDescription(service, area)}
+  h1={serviceH1(service, area)}
+  faqs={faqs}
+>
+  {Content && <Content />}
+</ServicePage>

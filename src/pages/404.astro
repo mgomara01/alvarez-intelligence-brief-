@@ -1,0 +1,16 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import { BUSINESS } from '../site.config';
+---
+<BaseLayout title="Page not found" description="That page doesn't exist." path="/404" noindex={true}>
+  <section class="section">
+    <div class="container prose" style="text-align:center;">
+      <h1>404 — that pipe leads nowhere</h1>
+      <p class="muted">The page you're after has been moved or never existed. Let's get you back on track.</p>
+      <p>
+        <a href="/" class="btn">Go home</a>
+        <a href={`tel:${BUSINESS.phone}`} class="btn btn--ghost">Call {BUSINESS.phoneDisplay}</a>
+      </p>
+    </div>
+  </section>
+</BaseLayout>

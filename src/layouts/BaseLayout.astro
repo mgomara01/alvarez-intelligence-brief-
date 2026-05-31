@@ -1,0 +1,42 @@
+---
+import BaseHead from '../components/BaseHead.astro';
+import Header from '../components/Header.astro';
+import Footer from '../components/Footer.astro';
+import { SITE } from '../site.config';
+import { localBusinessSchema, stringifyLd } from '../lib/schema';
+
+interface Props {
+  title: string;
+  description: string;
+  path: string;
+  image?: string;
+  type?: 'website' | 'article';
+  noindex?: boolean;
+  canonicalOverride?: string;
+  publishedTime?: string;
+  modifiedTime?: string;
+  /** Extra JSON-LD blocks (Article, Service, FAQ, Breadcrumb) per page. */
+  schemas?: Array<Record<string, unknown>>;
+}
+const { schemas = [], ...head } = Astro.props;
+const business = localBusinessSchema();
+---
+<!doctype html>
+<html lang={SITE.locale}>
+  <head>
+    <BaseHead {...head} />
+    <!-- Site-wide LocalBusiness schema -->
+    <script type="application/ld+json" is:inline set:html={stringifyLd(business)} />
+    {schemas.map((s) => (
+      <script type="application/ld+json" is:inline set:html={stringifyLd(s)} />
+    ))}
+  </head>
+  <body>
+    <a href="#main" class="skip-link">Skip to content</a>
+    <Header />
+    <main id="main">
+      <slot />
+    </main>
+    <Footer />
+  </body>
+</html>
