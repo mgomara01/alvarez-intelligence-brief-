@@ -10,5 +10,23 @@
     "slug": "emergency-plumber-toronto",
     "type": "service",
     "date": "2026-05-20"
+  },
+  {
+    "keyword": "toilet keeps running",
+    "slug": "toilet-keeps-running",
+    "type": "blog",
+    "date": "2026-05-24"
+  },
+  {
+    "keyword": "how to unclog a drain",
+    "slug": "how-to-unclog-a-drain",
+    "type": "blog",
+    "date": "2026-05-27"
+  },
+  {
+    "keyword": "furnace not blowing hot air",
+    "slug": "furnace-not-blowing-hot-air",
+    "type": "blog",
+    "date": "2026-05-30"
   }
 ]

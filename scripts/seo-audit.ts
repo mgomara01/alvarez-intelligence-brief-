@@ -156,7 +156,10 @@ function auditHtml(file: string) {
   if (!title) push('error', 'title', 'missing <title>');
   else if (title.length > 65) push('warn', 'title', `title ${title.length} chars`);
 
-  const desc = decode(html.match(/<meta\s+name=["']description["']\s+content=["']([^"']*)["']/i)?.[1] ?? '');
+  // Capture attribute values robustly: match the opening quote, then capture up
+  // to the SAME quote — so apostrophes inside a double-quoted value (e.g.
+  // content="you're") don't truncate the match.
+  const desc = decode(html.match(/<meta\s+name=["']description["']\s+content=(["'])(.*?)\1/i)?.[2] ?? '');
   if (!desc) push('error', 'meta-description', 'missing meta description');
   else if (desc.length < 50 || desc.length > 165) push('warn', 'meta-description', `length ${desc.length}`);
 
