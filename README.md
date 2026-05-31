@@ -1,9 +1,10 @@
-# Northwind — SEO Site + Content Engine (HVAC & Plumbing)
+# Alvarez Plumbing & Air Conditioning — SEO Site + Content Engine
 
 A **static, SEO-first website** plus a **content engine** that turns the
-"Claude Code + SEO masterclass" into real, runnable code. Built for a
-residential & commercial **HVAC and plumbing** business, but fully reusable for
-any local-service company — change one config file.
+"Claude Code + SEO masterclass" into real, runnable code. Configured for
+**Alvarez Plumbing & Air Conditioning** (residential & commercial plumbing and
+HVAC in Tampa, FL), but fully reusable for any local-service company — change
+one config file (`src/site.config.ts`).
 
 It implements the video's whole playbook:
 
@@ -82,7 +83,7 @@ in the brand voice and enforcing the checklist.
 Pages for every `service × city` render automatically from `site.config.ts`. To
 hand-tune a high-value money keyword:
 ```bash
-npm run new:service -- --service emergency-plumber --city toronto
+npm run new:service -- --service ac-repair --city tampa
 ```
 
 ## Deployment (GitHub → Vercel)
