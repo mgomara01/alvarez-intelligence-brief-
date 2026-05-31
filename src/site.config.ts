@@ -72,8 +72,8 @@ export const BUSINESS = {
   geo: { lat: 27.9626, lng: -82.3982 },
   /** Hours in schema.org openingHours shorthand. TODO: set your real hours. */
   hours: ['Mo-Fr 08:00-17:00'],
-  /** Emergency/availability copy. TODO: change to "24/7 emergency service" if true. */
-  emergencyLine: 'Same-day and emergency service available',
+  /** 24/7 emergency availability copy used across service pages. */
+  emergencyLine: '24/7 emergency service available',
   /**
    * Trust stats. Left blank on purpose — fill these in with REAL numbers only.
    * Fake review counts/ratings in schema get sites penalized by Google, and

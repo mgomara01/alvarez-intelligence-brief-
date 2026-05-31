@@ -65,6 +65,6 @@ Call a pro when:
 - You see **soot, a yellow flame** (it should be crisp blue), or you smell anything off.
 - It's dangerously cold and you've got kids, elderly family, or pets at home.
 
-That last one is exactly what our [AC repair & HVAC service](/services/ac-repair) line is for — same-day, any brand. And if your system is limping toward the end of its life, we'll give you the honest version: we once talked a family out of a $6,500 system they'd been quoted because all it needed was a $180 flame-sensor cleaning. When replacement genuinely is the smart move, our [AC & HVAC installation](/services/hvac-installation) crew sizes it properly instead of upselling you.
+That last one is exactly what our [AC repair & HVAC service](/services/ac-repair) line is for — 24/7, any brand. And if your system is limping toward the end of its life, we'll give you the honest version: we once talked a family out of a $6,500 system they'd been quoted because all it needed was a $180 flame-sensor cleaning. When replacement genuinely is the smart move, our [AC & HVAC installation](/services/hvac-installation) crew sizes it properly instead of upselling you.
 
 Most no-heat calls end at the thermostat or the filter. Start there, stay warm, and only escalate when the furnace actually earns it.

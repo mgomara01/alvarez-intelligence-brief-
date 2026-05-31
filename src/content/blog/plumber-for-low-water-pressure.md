@@ -75,6 +75,6 @@ Call us (or any licensed plumber) when:
 - Pressure is dropping over days and your bill is creeping up (possible leak).
 - You've got galvanized steel pipes from the disco era — corrosion narrows them from the inside, and that's a [repipe conversation](/services), not a DIY one.
 
-For the urgent stuff — no water, or water where it shouldn't be — that's what our [plumbing service](/services/plumbing-services) is for, with same-day and emergency availability. If hard water is the real culprit behind your fixture troubles, our [water optimization & filtration](/services/water-optimization) can help. And if low pressure is just the first symptom of older plumbing, our team can walk your whole system and tell you what's worth fixing and what isn't. (We're the company that talks people *out* of repairs they don't need, so you'll get a straight answer.)
+For the urgent stuff — no water, or water where it shouldn't be — that's what our [plumbing service](/services/plumbing-services) is for, with 24/7 emergency availability. If hard water is the real culprit behind your fixture troubles, our [water optimization & filtration](/services/water-optimization) can help. And if low pressure is just the first symptom of older plumbing, our team can walk your whole system and tell you what's worth fixing and what isn't. (We're the company that talks people *out* of repairs they don't need, so you'll get a straight answer.)
 
 Most low-pressure problems end at the aerator. If yours doesn't, now you know exactly what's next — and exactly when to hand it off.
