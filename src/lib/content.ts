@@ -6,7 +6,7 @@
 import type { Service, ServiceArea } from '../site.config';
 import { SITE, BUSINESS } from '../site.config';
 
-/** Money-keyword H1: "Emergency HVAC Repair in Toronto, ON". */
+/** Money-keyword H1: "AC Repair & HVAC Service in Tampa, FL". */
 export function serviceH1(service: Service, area?: ServiceArea): string {
   return area ? `${service.name} in ${area.city}, ${area.region}` : service.name;
 }
@@ -19,9 +19,9 @@ export function serviceMetaTitle(service: Service, area?: ServiceArea): string {
 }
 
 export function serviceMetaDescription(service: Service, area?: ServiceArea): string {
-  const where = area ? `${area.city}, ${area.region}` : 'your area';
+  const where = area ? `${area.city}, ${area.region}` : 'Tampa Bay';
   // Kept short so even long service names + city stay within ~155 chars.
-  return `Need ${service.name.toLowerCase()} in ${where}? Upfront flat-rate pricing, ${BUSINESS.yearsInBusiness}+ years, licensed & insured. Call ${BUSINESS.phoneDisplay}.`;
+  return `Need ${service.name.toLowerCase()} in ${where}? Upfront flat-rate pricing, licensed & insured, fast local service. Call ${BUSINESS.phoneDisplay}.`;
 }
 
 /** 4 default FAQs (meets the on-page "4-8 questions" rule + FAQPage schema). */

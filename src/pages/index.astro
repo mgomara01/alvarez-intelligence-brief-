@@ -4,6 +4,7 @@ import BaseLayout from '../layouts/BaseLayout.astro';
 import PostCard from '../components/PostCard.astro';
 import LeadForm from '../components/LeadForm.astro';
 import { SITE, BUSINESS, SERVICES } from '../site.config';
+import { trustPoints } from '../lib/seo';
 
 const posts = (await getCollection('blog', ({ data }) => !data.draft))
   .sort((a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf())
@@ -11,9 +12,10 @@ const posts = (await getCollection('blog', ({ data }) => !data.draft))
 
 const hvac = SERVICES.filter((s) => s.category === 'hvac');
 const plumbing = SERVICES.filter((s) => s.category === 'plumbing');
+const trust = trustPoints();
 ---
 <BaseLayout
-  title={`${SITE.name} — HVAC & Plumbing`}
+  title="Tampa Plumbing & Air Conditioning"
   description={SITE.description}
   path="/"
 >
@@ -21,20 +23,17 @@ const plumbing = SERVICES.filter((s) => s.category === 'plumbing');
   <section class="hero">
     <div class="container hero__inner">
       <div>
-        <span class="eyebrow">Residential &amp; commercial · {BUSINESS.address.region}</span>
+        <span class="eyebrow">Residential &amp; commercial · Greater Tampa Bay</span>
         <h1>{SITE.tagline}</h1>
         <p class="hero__sub">
-          Licensed HVAC and plumbing pros who show up on time, quote upfront, and fix it right.
+          Licensed plumbing and air conditioning pros who show up on time, quote upfront, and fix it right.
           {BUSINESS.emergencyLine}.
         </p>
         <div class="hero__cta">
           <a href="#contact" class="btn">Get a free quote</a>
           <a href={`tel:${BUSINESS.phone}`} class="btn btn--ghost">Call {BUSINESS.phoneDisplay}</a>
         </div>
-        <p class="muted hero__trust">
-          ★ {BUSINESS.rating}/5 · {BUSINESS.reviewCount.toLocaleString()} reviews ·
-          {BUSINESS.jobsCompleted} jobs · {BUSINESS.yearsInBusiness} years
-        </p>
+        <p class="muted hero__trust">{trust.join(' · ')}</p>
       </div>
     </div>
   </section>
@@ -45,17 +44,17 @@ const plumbing = SERVICES.filter((s) => s.category === 'plumbing');
       <h2>What we do</h2>
       <div class="svc-cols">
         <div>
-          <h3>Heating &amp; Cooling (HVAC)</h3>
+          <h3>Plumbing</h3>
           <ul class="svc-list">
-            {hvac.map((s) => (
+            {plumbing.map((s) => (
               <li><a href={`/services/${s.slug}`}>{s.name}</a> — <span class="muted">{s.blurb}</span></li>
             ))}
           </ul>
         </div>
         <div>
-          <h3>Plumbing</h3>
+          <h3>Air Conditioning &amp; HVAC</h3>
           <ul class="svc-list">
-            {plumbing.map((s) => (
+            {hvac.map((s) => (
               <li><a href={`/services/${s.slug}`}>{s.name}</a> — <span class="muted">{s.blurb}</span></li>
             ))}
           </ul>
@@ -70,10 +69,10 @@ const plumbing = SERVICES.filter((s) => s.category === 'plumbing');
     <div class="container prose">
       <h2>Why {SITE.name}</h2>
       <p>
-        We've spent {BUSINESS.yearsInBusiness} years doing one thing: making the heating, cooling, and plumbing
-        in {BUSINESS.address.city} and the surrounding cities just <em>work</em> — for families and for businesses.
-        {BUSINESS.jobsCompleted} jobs later, the formula hasn't changed: answer the phone, show up, quote it
-        straight, and stand behind the work.
+        We do one thing across {BUSINESS.address.city} and the greater Tampa Bay area: make the plumbing and
+        air conditioning in your home or business just <em>work</em>. From a dripping faucet to a full AC
+        install, from backflow testing to a commercial build-out, the formula doesn't change — answer the
+        phone, show up, quote it straight, and stand behind the work.
       </p>
     </div>
   </section>

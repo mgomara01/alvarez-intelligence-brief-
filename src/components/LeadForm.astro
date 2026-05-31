@@ -7,6 +7,7 @@
  * required, works on Vercel static). Replace FORM_ENDPOINT or wire your own.
  */
 import { BUSINESS } from '../site.config';
+import { trustPoints } from '../lib/seo';
 
 interface Props {
   service?: string;
@@ -15,6 +16,7 @@ interface Props {
   heading?: string;
 }
 const { service, city, heading } = Astro.props;
+const points = trustPoints();
 
 // TODO: replace with your real Formspree (or Vercel form) endpoint.
 const FORM_ENDPOINT = 'https://formspree.io/f/your-form-id';
@@ -29,9 +31,7 @@ const title = heading ?? (service ? `Get a fast quote for ${service}${city ? ` i
         {BUSINESS.emergencyLine} at <a href={`tel:${BUSINESS.phone}`}>{BUSINESS.phoneDisplay}</a>.
       </p>
       <ul class="lead__trust">
-        <li>★ {BUSINESS.rating}/5 from {BUSINESS.reviewCount.toLocaleString()} reviews</li>
-        <li>{BUSINESS.jobsCompleted} jobs completed</li>
-        <li>{BUSINESS.yearsInBusiness} years in business · licensed &amp; insured</li>
+        {points.map((p) => <li>{p}</li>)}
       </ul>
     </div>
 

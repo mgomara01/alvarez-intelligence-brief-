@@ -11,15 +11,18 @@ type Json = Record<string, unknown>;
 export function localBusinessSchema(): Json {
   return {
     '@context': 'https://schema.org',
-    '@type': ['HVACBusiness', 'Plumber', 'LocalBusiness'],
+    '@type': ['Plumber', 'HVACBusiness', 'LocalBusiness'],
     '@id': `${SITE.url}/#business`,
     name: SITE.name,
     legalName: BUSINESS.legalName,
+    // dba surfaced as an alternate name so searches for either spelling match.
+    alternateName: BUSINESS.dba || undefined,
     url: SITE.url,
     telephone: BUSINESS.phone,
     email: BUSINESS.email,
     image: `${SITE.url}${SITE.defaultOgImage}`,
     priceRange: '$$',
+    foundingDate: BUSINESS.foundedYear || undefined,
     address: {
       '@type': 'PostalAddress',
       streetAddress: BUSINESS.address.street,
@@ -33,12 +36,18 @@ export function localBusinessSchema(): Json {
       latitude: BUSINESS.geo.lat,
       longitude: BUSINESS.geo.lng,
     },
+    areaServed: { '@type': 'AdministrativeArea', name: 'Greater Tampa Bay, FL' },
     openingHours: BUSINESS.hours,
-    aggregateRating: {
-      '@type': 'AggregateRating',
-      ratingValue: BUSINESS.rating,
-      reviewCount: BUSINESS.reviewCount,
-    },
+    // Only emit aggregateRating when real review data exists. Inventing it
+    // violates Google's structured-data policy and risks a manual penalty.
+    aggregateRating:
+      BUSINESS.rating > 0 && BUSINESS.reviewCount > 0
+        ? {
+            '@type': 'AggregateRating',
+            ratingValue: BUSINESS.rating,
+            reviewCount: BUSINESS.reviewCount,
+          }
+        : undefined,
     sameAs: Object.values(BUSINESS.socials).filter(Boolean),
   };
 }

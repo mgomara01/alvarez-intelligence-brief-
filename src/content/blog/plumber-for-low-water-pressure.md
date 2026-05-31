@@ -2,7 +2,7 @@
 title: "Plumber for Low Water Pressure: Fix It or Call One?"
 description: "Low water pressure driving you nuts? Here's how to find the cause in 10 minutes, what you can fix yourself, and when it's time to call a plumber."
 pubDate: 2026-05-20
-author: "Northwind Team"
+author: "Alvarez Plumbing & Air Conditioning"
 tags: ["Plumbing", "Troubleshooting"]
 primaryKeyword: "plumber for low water pressure"
 keywordCluster:
@@ -58,7 +58,7 @@ Now we work through the usual suspects, cheapest first:
 If someone worked on your plumbing recently, the main valve may have been left half-closed. Find it (usually where the water line enters the house) and make sure it's fully open. This is free, takes 30 seconds, and fixes more "mystery" pressure problems than anything else.
 
 ### 2. A failing pressure regulator
-This is the bell-shaped valve near your main line. When it fails, pressure across the whole house drops (or spikes). Testing it means putting a gauge on an outdoor spigot — normal is [**40–60 psi**](https://www.usgs.gov/special-topics/water-science-school/science/water-qa-water-pressure). A bad regulator is a real repair, and one we'd handle as part of our [water heater and plumbing repair service](/services/water-heater), since it often shows up alongside other aging valves.
+This is the bell-shaped valve near your main line. When it fails, pressure across the whole house drops (or spikes). Testing it means putting a gauge on an outdoor spigot — normal is [**40–60 psi**](https://www.usgs.gov/special-topics/water-science-school/science/water-qa-water-pressure). A bad regulator is a real repair, and one we'd handle as part of our [plumbing repair service](/services/plumbing-services), since it often shows up alongside other aging valves.
 
 ### 3. A hidden leak
 If pressure is dropping *and* your water bill is climbing, you may have a leak quietly feeding a wall or a slab. This is the one that costs you if you ignore it. We once caught a pinhole leak in a copper line that had been weeping behind drywall for months — a faint ceiling stain was the only clue. If you suspect this, don't wait it out.
@@ -75,6 +75,6 @@ Call us (or any licensed plumber) when:
 - Pressure is dropping over days and your bill is creeping up (possible leak).
 - You've got galvanized steel pipes from the disco era — corrosion narrows them from the inside, and that's a [repipe conversation](/services), not a DIY one.
 
-For the urgent stuff — no water, or water where it shouldn't be — that's what our [emergency plumber service](/services/emergency-plumber) is for, 24/7. And if low pressure is just the first symptom of older plumbing, our team can walk your whole system and tell you what's worth fixing and what isn't. (We're the company that talks people *out* of repairs they don't need, so you'll get a straight answer.)
+For the urgent stuff — no water, or water where it shouldn't be — that's what our [plumbing service](/services/plumbing-services) is for, with same-day and emergency availability. If hard water is the real culprit behind your fixture troubles, our [water optimization & filtration](/services/water-optimization) can help. And if low pressure is just the first symptom of older plumbing, our team can walk your whole system and tell you what's worth fixing and what isn't. (We're the company that talks people *out* of repairs they don't need, so you'll get a straight answer.)
 
 Most low-pressure problems end at the aerator. If yours doesn't, now you know exactly what's next — and exactly when to hand it off.

@@ -4,8 +4,10 @@ import FAQ from '../components/FAQ.astro';
 import LeadForm from '../components/LeadForm.astro';
 import { SITE, BUSINESS } from '../site.config';
 import type { Service, ServiceArea } from '../site.config';
-import { canonical } from '../lib/seo';
+import { canonical, trustPoints } from '../lib/seo';
 import { serviceSchema, faqSchema, breadcrumbSchema } from '../lib/schema';
+
+const trust = trustPoints();
 
 interface Props {
   service: Service;
@@ -51,7 +53,7 @@ const schemas = [
         <a href={`tel:${BUSINESS.phone}`} class="btn btn--ghost">Call {BUSINESS.phoneDisplay}</a>
       </div>
       <p class="muted svc-hero__trust">
-        ★ {BUSINESS.rating}/5 ({BUSINESS.reviewCount.toLocaleString()} reviews) · {BUSINESS.emergencyLine}
+        {[...trust, BUSINESS.emergencyLine].join(' · ')}
       </p>
     </div>
   </section>
@@ -67,10 +69,10 @@ const schemas = [
         </p>
         <h2>Why {where} homeowners and businesses call us</h2>
         <ul>
-          <li><strong>{BUSINESS.yearsInBusiness}+ years</strong> and {BUSINESS.jobsCompleted} jobs across the region.</li>
           <li>Upfront, flat-rate pricing — no surprise line items.</li>
           <li>Licensed, insured technicians for both residential and commercial work.</li>
           <li>{BUSINESS.emergencyLine}.</li>
+          <li>Local to Tampa Bay — we know Florida homes, hard water, and heat.</li>
         </ul>
         <h2>Our {service.name.toLowerCase()} process</h2>
         <ol>

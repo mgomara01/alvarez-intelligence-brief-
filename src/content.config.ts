@@ -29,7 +29,7 @@ const blog = defineCollection({
       description: z.string(),
       pubDate: z.coerce.date(),
       updatedDate: z.coerce.date().optional(),
-      author: z.string().default('Northwind Team'),
+      author: z.string().default('Alvarez Plumbing & Air Conditioning'),
       heroImage: image().optional(),
       heroImageAlt: z.string().default(''),
       heroImageCredit: z.string().optional(),

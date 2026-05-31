@@ -68,6 +68,6 @@ Call a pro when:
 - The tank or bowl is cracked.
 - Multiple toilets do it at once — that can hint at a supply or pressure problem.
 
-For the stuff that won't wait — water where it shouldn't be — that's what our [emergency plumber service](/services/emergency-plumber) is for, around the clock. And if your "running toilet" turns out to be a symptom of older, tired plumbing throughout the house, our team can walk the whole system and tell you what's actually worth fixing. (We're the company that talks people *out* of repairs they don't need.)
+For the stuff that won't wait — water where it shouldn't be — that's what our [plumbing service](/services/plumbing-services) is for, with same-day and emergency availability. And if your "running toilet" turns out to be a symptom of older, tired plumbing throughout the house, our team can walk the whole system and tell you what's actually worth fixing. (We're the company that talks people *out* of repairs they don't need.)
 
 One more nudge to fix it today: the U.S. EPA notes that [a single running toilet can waste hundreds of gallons a day](https://www.epa.gov/watersense/fix-leak-week). That hiss isn't just annoying — it's money trickling down the drain. And if your toilet is an old water-guzzler anyway, the EPA's [WaterSense toilet guidance](https://www.epa.gov/watersense/residential-toilets) is worth a read before you replace it. Swap the flapper and call it a win.

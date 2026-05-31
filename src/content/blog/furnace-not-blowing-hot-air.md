@@ -44,7 +44,7 @@ This single check resolves a shocking number of "my furnace is broken" calls. No
 
 If the thermostat's fine, the filter is the next stop and, honestly, the cause most of the time. A clogged filter strangles airflow, the heat exchanger overheats, and a safety switch shuts the burners off to protect the unit — while the fan keeps running. Result: cold air.
 
-Pull the filter. If you can't see light through it, replace it (they're about $15). Then give the furnace a few minutes to reset and try again. This is also why we nag everyone about maintenance: a quick [seasonal HVAC tune-up](/services/emergency-hvac-repair) catches the filter, the flame sensor, and a dozen other small things before they become a cold night. ENERGY STAR has a simple [heating maintenance checklist](https://www.energystar.gov/products/heating_cooling) if you want to stay ahead of it.
+Pull the filter. If you can't see light through it, replace it (they're about $15). Then give the furnace a few minutes to reset and try again. This is also why we nag everyone about maintenance: a quick [seasonal HVAC tune-up](/services/ac-repair) catches the filter, the flame sensor, and a dozen other small things before they become a cold night. ENERGY STAR has a simple [heating maintenance checklist](https://www.energystar.gov/products/heating_cooling) if you want to stay ahead of it.
 
 ## Check 3: power, pilot, and gas
 
@@ -65,6 +65,6 @@ Call a pro when:
 - You see **soot, a yellow flame** (it should be crisp blue), or you smell anything off.
 - It's dangerously cold and you've got kids, elderly family, or pets at home.
 
-That last one is exactly what our [emergency HVAC repair](/services/emergency-hvac-repair) line is for — 24/7, same-day, any brand. And if your furnace is limping toward the end of its life, we'll give you the honest version: we once talked a family out of a $6,500 furnace they'd been quoted because all it needed was a $180 flame-sensor cleaning. When replacement genuinely is the smart move, our [furnace installation](/services/furnace-installation) crew sizes it properly instead of upselling you.
+That last one is exactly what our [AC repair & HVAC service](/services/ac-repair) line is for — same-day, any brand. And if your system is limping toward the end of its life, we'll give you the honest version: we once talked a family out of a $6,500 system they'd been quoted because all it needed was a $180 flame-sensor cleaning. When replacement genuinely is the smart move, our [AC & HVAC installation](/services/hvac-installation) crew sizes it properly instead of upselling you.
 
 Most no-heat calls end at the thermostat or the filter. Start there, stay warm, and only escalate when the furnace actually earns it.

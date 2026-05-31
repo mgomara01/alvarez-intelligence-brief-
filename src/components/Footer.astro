@@ -1,7 +1,9 @@
 ---
-import { SITE, BUSINESS, SERVICES, SERVICE_AREAS } from '../site.config';
+import { SITE, BUSINESS, SERVICES, SERVICE_AREAS, firstLocalizedService } from '../site.config';
 const year = new Date().getFullYear();
 const topServices = SERVICES.slice(0, 6);
+// City links point at the first localizable service that actually exists.
+const cityService = firstLocalizedService();
 ---
 <footer class="site-footer">
   <div class="container site-footer__grid">
@@ -30,7 +32,7 @@ const topServices = SERVICES.slice(0, 6);
       <p class="site-footer__heading">Service Areas</p>
       <ul>
         {SERVICE_AREAS.map((a) => (
-          <li><a href={`/services/emergency-hvac-repair/${a.slug}`}>{a.city}, {a.region}</a></li>
+          <li><a href={`/services/${cityService.slug}/${a.slug}`}>{a.city}, {a.region}</a></li>
         ))}
       </ul>
     </div>

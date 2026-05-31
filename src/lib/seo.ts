@@ -2,7 +2,23 @@
  * Small SEO helpers shared by layouts. The heavy on-page validation lives in
  * scripts/seo-audit.ts (run against built HTML); these are render-time utils.
  */
-import { SITE } from '../site.config';
+import { SITE, BUSINESS } from '../site.config';
+
+/**
+ * Build a "trust line" from ONLY the stats that are actually set. Returns the
+ * pieces as an array so callers can join/format as they like. Keeps us from
+ * ever rendering "★ 0/5 (0 reviews)" or "0 years" placeholder garbage.
+ */
+export function trustPoints(): string[] {
+  const out: string[] = [];
+  if (BUSINESS.rating > 0 && BUSINESS.reviewCount > 0)
+    out.push(`★ ${BUSINESS.rating}/5 (${BUSINESS.reviewCount.toLocaleString()} reviews)`);
+  if (BUSINESS.jobsCompleted) out.push(`${BUSINESS.jobsCompleted} jobs completed`);
+  if (BUSINESS.foundedYear) out.push(`Serving Tampa Bay since ${BUSINESS.foundedYear}`);
+  else if (BUSINESS.yearsInBusiness > 0) out.push(`${BUSINESS.yearsInBusiness}+ years in business`);
+  out.push('Licensed & insured');
+  return out;
+}
 
 /** Build an absolute, canonical URL from a path. */
 export function canonical(path: string): string {

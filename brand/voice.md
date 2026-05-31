@@ -5,7 +5,8 @@
 > the output reads like generic AI slop.
 
 ## Who we are
-A residential + commercial HVAC and plumbing company. We're the crew that
+Alvarez Plumbing & Air Conditioning — a residential + commercial plumbing and
+air conditioning company in Tampa, FL. We're the crew that
 answers the phone at 2am, quotes the price before we start, and tells you the
 truth even when the truth is "you don't need that repair."
 
