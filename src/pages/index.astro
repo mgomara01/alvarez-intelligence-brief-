@@ -66,14 +66,23 @@ const trust = trustPoints();
 
   <!-- ABOUT -->
   <section class="section section--surface" id="about">
-    <div class="container prose">
-      <h2>Why {SITE.name}</h2>
-      <p>
-        We do one thing across {BUSINESS.address.city} and the greater Tampa Bay area: make the plumbing and
-        air conditioning in your home or business just <em>work</em>. From a dripping faucet to a full AC
-        install, from backflow testing to a commercial build-out, the formula doesn't change — answer the
-        phone, show up, quote it straight, and stand behind the work.
-      </p>
+    <div class="container">
+      <div class="prose">
+        <h2>Why {SITE.name}</h2>
+        <p>
+          Since {BUSINESS.foundedYear}, we've done one thing across {BUSINESS.address.city} and the greater
+          Tampa Bay area: make the plumbing and air conditioning in your home or business just <em>work</em>.
+          From a dripping faucet to a full AC install, from backflow testing to a commercial build-out, the
+          formula hasn't changed in nearly 50 years — answer the phone, show up, quote it straight, and stand
+          behind the work.
+        </p>
+      </div>
+      <dl class="stats">
+        <div class="stats__item"><dt>Since {BUSINESS.foundedYear}</dt><dd>serving Tampa Bay</dd></div>
+        <div class="stats__item"><dt>{BUSINESS.rating}★</dt><dd>{BUSINESS.reviewCount.toLocaleString()} reviews</dd></div>
+        <div class="stats__item"><dt>{BUSINESS.jobsLastYear}</dt><dd>jobs completed last year</dd></div>
+        <div class="stats__item"><dt>{BUSINESS.hoursLastYear}</dt><dd>hours worked last year</dd></div>
+      </dl>
     </div>
   </section>
 
@@ -114,5 +123,9 @@ const trust = trustPoints();
   .svc-cols { display: grid; grid-template-columns: 1fr 1fr; gap: 2rem; }
   .svc-list { list-style: none; padding: 0; }
   .svc-list li { padding: 0.45rem 0; border-bottom: 1px solid var(--border); }
-  @media (max-width: 720px) { .svc-cols { grid-template-columns: 1fr; } }
+  .stats { display: grid; grid-template-columns: repeat(4, 1fr); gap: 1.5rem; margin: 2rem 0 0; }
+  .stats__item { text-align: center; }
+  .stats dt { font-size: clamp(1.6rem, 4vw, 2.4rem); font-weight: 800; color: var(--brand-dark); line-height: 1.1; }
+  .stats dd { margin: 0.3rem 0 0; color: var(--muted); font-size: 0.95rem; }
+  @media (max-width: 720px) { .svc-cols { grid-template-columns: 1fr; } .stats { grid-template-columns: 1fr 1fr; } }
 </style>

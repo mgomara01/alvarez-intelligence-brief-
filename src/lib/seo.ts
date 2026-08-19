@@ -13,9 +13,9 @@ export function trustPoints(): string[] {
   const out: string[] = [];
   if (BUSINESS.rating > 0 && BUSINESS.reviewCount > 0)
     out.push(`★ ${BUSINESS.rating}/5 (${BUSINESS.reviewCount.toLocaleString()} reviews)`);
-  if (BUSINESS.jobsCompleted) out.push(`${BUSINESS.jobsCompleted} jobs completed`);
   if (BUSINESS.foundedYear) out.push(`Serving Tampa Bay since ${BUSINESS.foundedYear}`);
   else if (BUSINESS.yearsInBusiness > 0) out.push(`${BUSINESS.yearsInBusiness}+ years in business`);
+  if (BUSINESS.jobsLastYear) out.push(`${BUSINESS.jobsLastYear} jobs last year`);
   out.push('Licensed & insured');
   return out;
 }

@@ -15,16 +15,22 @@
   commercial HVAC service and installation, plumbing light construction
 - Licensed & insured (FL)
 
-## TODO — fill in with REAL figures, then they appear automatically
-> These are intentionally blank in `src/site.config.ts`. Plugging real values
-> into `BUSINESS` makes them show up in copy AND structured data. Leave blank and
-> nothing fake gets published.
-- Year founded / years in business: _____
-- Google rating + review count: _____  (must match your real Google profile)
-- Jobs completed (only if you can stand behind the number): _____
-- Exact business hours: _____
-- Whether you offer true 24/7 emergency service (currently worded "same-day and
-  emergency service available" — change in config if 24/7): _____
+## Confirmed trust stats (now live in copy + schema)
+- **Founded 1976** — nearly 50 years serving Tampa Bay
+- **4.8★ rating on 2,661 reviews** (matches Google profile)
+- **15,550 jobs completed last year** (a last-year figure — always label it as
+  "last year," never imply it's an all-time total)
+- **27,150 hours worked last year**
+- **24/7 emergency service**
+
+> Usage note: the jobs/hours figures are ANNUAL. In copy, always say "last year"
+> or "in a single year" so the claim stays accurate and defensible. The rating,
+> review count, and founding year flow automatically into the site's structured
+> data (aggregateRating + foundingDate) via `src/site.config.ts`.
+
+## Still to confirm
+- Exact business hours (currently "Mo-Fr 08:00-17:00" placeholder in config —
+  update `BUSINESS.hours` if different)
 
 ## Useful Florida-specific ranges to cite (verify for your pricing!)
 - Running toilet repair: ~$120–$300 (often a $20–$40 part)

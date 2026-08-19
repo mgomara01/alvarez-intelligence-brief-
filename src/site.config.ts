@@ -75,16 +75,16 @@ export const BUSINESS = {
   /** 24/7 emergency availability copy used across service pages. */
   emergencyLine: '24/7 emergency service available',
   /**
-   * Trust stats. Left blank on purpose — fill these in with REAL numbers only.
-   * Fake review counts/ratings in schema get sites penalized by Google, and
-   * unverifiable claims under your brand are a liability. When set, they appear
-   * in copy + structured data automatically; when blank/0, they're hidden.
+   * Trust stats — real, confirmed figures for Alvarez. When set, they appear in
+   * copy + structured data automatically; when blank/0, they're hidden.
    */
-  yearsInBusiness: 0,        // e.g. set to the real number, or use foundedYear below
-  foundedYear: '',           // e.g. "1976" — shows as "Since 1976" if set
-  jobsCompleted: '',         // e.g. "30,000+" (only if accurate)
-  rating: 0,                 // e.g. 4.8 (your real Google rating)
-  reviewCount: 0,            // e.g. 850 (your real Google review count)
+  yearsInBusiness: 0,        // derived from foundedYear below; leave 0
+  foundedYear: '1976',       // shows as "Serving Tampa Bay since 1976"
+  rating: 4.8,               // real Google rating
+  reviewCount: 2661,         // real Google review count
+  /** Last-year operational figures (labeled as such in copy, not all-time). */
+  jobsLastYear: '15,550',
+  hoursLastYear: '27,150',
   socials: {
     facebook: '',
     instagram: '',
