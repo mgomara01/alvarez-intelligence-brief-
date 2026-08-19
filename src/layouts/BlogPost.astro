@@ -1,0 +1,81 @@
+---
+import type { CollectionEntry } from 'astro:content';
+import { Image } from 'astro:assets';
+import BaseLayout from './BaseLayout.astro';
+import FAQ from '../components/FAQ.astro';
+import LeadForm from '../components/LeadForm.astro';
+import { SITE } from '../site.config';
+import { canonical } from '../lib/seo';
+import { articleSchema, faqSchema, breadcrumbSchema } from '../lib/schema';
+
+interface Props {
+  entry: CollectionEntry<'blog'>;
+}
+const { entry } = Astro.props;
+const d = entry.data;
+const path = `/blog/${entry.id}`;
+const url = canonical(path);
+
+const schemas = [
+  articleSchema({
+    title: d.metaTitle ?? d.title,
+    description: d.metaDescription,
+    url,
+    image: d.heroImage?.src,
+    datePublished: d.pubDate,
+    dateModified: d.updatedDate,
+    author: d.author,
+  }),
+  breadcrumbSchema([
+    { name: 'Home', url: SITE.url },
+    { name: 'Blog', url: canonical('/blog') },
+    { name: d.title, url },
+  ]),
+  faqSchema(d.faqs),
+].filter(Boolean) as Array<Record<string, unknown>>;
+---
+<BaseLayout
+  title={d.metaTitle ?? d.title}
+  description={d.metaDescription}
+  path={path}
+  image={d.heroImage?.src}
+  type="article"
+  noindex={d.draft}
+  canonicalOverride={d.canonical}
+  publishedTime={d.pubDate.toISOString()}
+  modifiedTime={(d.updatedDate ?? d.pubDate).toISOString()}
+  schemas={schemas}
+>
+  <article class="section">
+    <div class="container prose">
+      <nav class="crumbs muted" aria-label="Breadcrumb">
+        <a href="/">Home</a> / <a href="/blog">Blog</a>
+      </nav>
+      <!-- Exactly one H1 per page (on-page SEO rule). -->
+      <h1>{d.title}</h1>
+      <p class="muted post-meta">
+        By {d.author} ·
+        <time datetime={d.pubDate.toISOString()}>
+          {d.pubDate.toLocaleDateString('en-US', { year: 'numeric', month: 'long', day: 'numeric' })}
+        </time>
+      </p>
+
+      {d.heroImage && (
+        <figure>
+          <Image src={d.heroImage} alt={d.heroImageAlt} width={1200} height={675} loading="eager" />
+          {d.heroImageCredit && <figcaption class="muted">{d.heroImageCredit}</figcaption>}
+        </figure>
+      )}
+
+      <slot />
+    </div>
+  </article>
+
+  <FAQ faqs={d.faqs} />
+  <LeadForm heading="Got a problem that won't wait? Let's fix it." />
+</BaseLayout>
+
+<style>
+  .crumbs { font-size: 0.9rem; margin-bottom: 0.5rem; }
+  .post-meta { margin-top: 0; }
+</style>

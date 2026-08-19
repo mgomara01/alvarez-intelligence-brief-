@@ -1,0 +1,73 @@
+---
+/**
+ * The conversion engine for service pages. The video's whole point about
+ * service pages: rank for money keywords -> get the form filled out.
+ *
+ * Submits to a static-friendly endpoint. Default uses Formspree (no backend
+ * required, works on Vercel static). Replace FORM_ENDPOINT or wire your own.
+ */
+import { BUSINESS } from '../site.config';
+import { trustPoints } from '../lib/seo';
+
+interface Props {
+  service?: string;
+  city?: string;
+  /** Override the heading. */
+  heading?: string;
+}
+const { service, city, heading } = Astro.props;
+const points = trustPoints();
+
+// TODO: replace with your real Formspree (or Vercel form) endpoint.
+const FORM_ENDPOINT = 'https://formspree.io/f/your-form-id';
+const title = heading ?? (service ? `Get a fast quote for ${service}${city ? ` in ${city}` : ''}` : 'Request service');
+---
+<section class="lead" id="contact" aria-labelledby="lead-heading">
+  <div class="container lead__inner">
+    <div class="lead__copy">
+      <h2 id="lead-heading">{title}</h2>
+      <p class="muted">
+        Tell us what's going on and we'll call you back fast — usually within the hour during business hours.
+        {BUSINESS.emergencyLine} at <a href={`tel:${BUSINESS.phone}`}>{BUSINESS.phoneDisplay}</a>.
+      </p>
+      <ul class="lead__trust">
+        {points.map((p) => <li>{p}</li>)}
+      </ul>
+    </div>
+
+    <form class="lead__form" action={FORM_ENDPOINT} method="POST">
+      {service && <input type="hidden" name="service" value={service} />}
+      {city && <input type="hidden" name="city" value={city} />}
+      <label> Name
+        <input type="text" name="name" required autocomplete="name" />
+      </label>
+      <label> Phone
+        <input type="tel" name="phone" required autocomplete="tel" />
+      </label>
+      <label> Email
+        <input type="email" name="email" autocomplete="email" />
+      </label>
+      <label> How can we help?
+        <textarea name="message" rows="3" required></textarea>
+      </label>
+      <button type="submit" class="btn">Get my free quote</button>
+      <p class="lead__fineprint muted">No spam. We only use your info to contact you about your request.</p>
+    </form>
+  </div>
+</section>
+
+<style>
+  .lead { background: var(--brand-dark); color: #fff; padding: 3.5rem 0; }
+  .lead__inner { display: grid; grid-template-columns: 1fr 1fr; gap: 2.5rem; align-items: center; }
+  .lead h2 { color: #fff; margin-top: 0; }
+  .lead .muted { color: #c5d6ec; }
+  .lead a { color: #fff; text-decoration: underline; }
+  .lead__trust { list-style: none; padding: 0; margin: 1.2rem 0 0; display: grid; gap: 0.4rem; }
+  .lead__form { background: #fff; color: var(--fg); border-radius: var(--radius); padding: 1.5rem; display: grid; gap: 0.8rem; }
+  .lead__form label { display: grid; gap: 0.3rem; font-weight: 600; font-size: 0.95rem; }
+  .lead__form input, .lead__form textarea {
+    font: inherit; padding: 0.7rem; border: 1px solid var(--border); border-radius: 8px; width: 100%;
+  }
+  .lead__fineprint { font-size: 0.8rem; margin: 0; }
+  @media (max-width: 820px) { .lead__inner { grid-template-columns: 1fr; } }
+</style>

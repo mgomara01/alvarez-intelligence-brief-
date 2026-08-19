@@ -1,0 +1,60 @@
+---
+import { SITE, BUSINESS, SERVICES, SERVICE_AREAS, firstLocalizedService } from '../site.config';
+const year = new Date().getFullYear();
+const topServices = SERVICES.slice(0, 6);
+// City links point at the first localizable service that actually exists.
+const cityService = firstLocalizedService();
+---
+<footer class="site-footer">
+  <div class="container site-footer__grid">
+    <div>
+      <p class="site-footer__brand">{SITE.name}</p>
+      <p class="muted">{SITE.tagline}</p>
+      <!-- NAP (Name/Address/Phone) — must match Google Business Profile exactly. -->
+      <address class="site-footer__nap">
+        {BUSINESS.address.street}, {BUSINESS.address.city}, {BUSINESS.address.region} {BUSINESS.address.postalCode}<br />
+        <a href={`tel:${BUSINESS.phone}`}>{BUSINESS.phoneDisplay}</a> ·
+        <a href={`mailto:${BUSINESS.email}`}>{BUSINESS.email}</a>
+      </address>
+      <p class="muted">{BUSINESS.emergencyLine}</p>
+    </div>
+
+    <div>
+      <p class="site-footer__heading">Services</p>
+      <ul>
+        {topServices.map((s) => (
+          <li><a href={`/services/${s.slug}`}>{s.name}</a></li>
+        ))}
+      </ul>
+    </div>
+
+    <div>
+      <p class="site-footer__heading">Service Areas</p>
+      <ul>
+        {SERVICE_AREAS.map((a) => (
+          <li><a href={`/services/${cityService.slug}/${a.slug}`}>{a.city}, {a.region}</a></li>
+        ))}
+      </ul>
+    </div>
+  </div>
+
+  <div class="container site-footer__bottom">
+    <p class="muted">© {year} {BUSINESS.legalName}. All rights reserved.</p>
+    <p class="muted"><a href="/blog">Blog</a> · <a href="/services">All Services</a></p>
+  </div>
+</footer>
+
+<style>
+  .site-footer { background: var(--fg); color: #cbd2dc; padding: 3rem 0 1.5rem; margin-top: 4rem; }
+  .site-footer a { color: #cbd2dc; }
+  .site-footer a:hover { color: #fff; }
+  .site-footer__grid { display: grid; gap: 2rem; grid-template-columns: 1.4fr 1fr 1fr; }
+  .site-footer__brand { font-weight: 800; color: #fff; font-size: 1.1rem; margin: 0 0 0.3rem; }
+  .site-footer__heading { font-weight: 700; color: #fff; margin: 0 0 0.6rem; }
+  .site-footer ul { list-style: none; margin: 0; padding: 0; }
+  .site-footer li { padding: 0.25rem 0; }
+  .site-footer__nap { font-style: normal; margin: 0.8rem 0; }
+  .site-footer .muted { color: #8a94a3; }
+  .site-footer__bottom { display: flex; justify-content: space-between; flex-wrap: wrap; gap: 0.5rem; border-top: 1px solid #2a3340; margin-top: 2rem; padding-top: 1.2rem; }
+  @media (max-width: 720px) { .site-footer__grid { grid-template-columns: 1fr; } }
+</style>

@@ -1,0 +1,131 @@
+---
+import { getCollection } from 'astro:content';
+import BaseLayout from '../layouts/BaseLayout.astro';
+import PostCard from '../components/PostCard.astro';
+import LeadForm from '../components/LeadForm.astro';
+import { SITE, BUSINESS, SERVICES } from '../site.config';
+import { trustPoints } from '../lib/seo';
+
+const posts = (await getCollection('blog', ({ data }) => !data.draft))
+  .sort((a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf())
+  .slice(0, 3);
+
+const hvac = SERVICES.filter((s) => s.category === 'hvac');
+const plumbing = SERVICES.filter((s) => s.category === 'plumbing');
+const trust = trustPoints();
+---
+<BaseLayout
+  title="Tampa Plumbing & Air Conditioning"
+  description={SITE.description}
+  path="/"
+>
+  <!-- HERO -->
+  <section class="hero">
+    <div class="container hero__inner">
+      <div>
+        <span class="eyebrow">Residential &amp; commercial · Greater Tampa Bay</span>
+        <h1>{SITE.tagline}</h1>
+        <p class="hero__sub">
+          Licensed plumbing and air conditioning pros who show up on time, quote upfront, and fix it right.
+          {BUSINESS.emergencyLine}.
+        </p>
+        <div class="hero__cta">
+          <a href="#contact" class="btn">Get a free quote</a>
+          <a href={`tel:${BUSINESS.phone}`} class="btn btn--ghost">Call {BUSINESS.phoneDisplay}</a>
+        </div>
+        <p class="muted hero__trust">{trust.join(' · ')}</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- SERVICES -->
+  <section class="section" id="services">
+    <div class="container">
+      <h2>What we do</h2>
+      <div class="svc-cols">
+        <div>
+          <h3>Plumbing</h3>
+          <ul class="svc-list">
+            {plumbing.map((s) => (
+              <li><a href={`/services/${s.slug}`}>{s.name}</a> — <span class="muted">{s.blurb}</span></li>
+            ))}
+          </ul>
+        </div>
+        <div>
+          <h3>Air Conditioning &amp; HVAC</h3>
+          <ul class="svc-list">
+            {hvac.map((s) => (
+              <li><a href={`/services/${s.slug}`}>{s.name}</a> — <span class="muted">{s.blurb}</span></li>
+            ))}
+          </ul>
+        </div>
+      </div>
+      <p><a href="/services" class="btn btn--ghost">See all services &amp; areas →</a></p>
+    </div>
+  </section>
+
+  <!-- ABOUT -->
+  <section class="section section--surface" id="about">
+    <div class="container">
+      <div class="prose">
+        <h2>Why {SITE.name}</h2>
+        <p>
+          Since {BUSINESS.foundedYear}, we've done one thing across {BUSINESS.address.city} and the greater
+          Tampa Bay area: make the plumbing and air conditioning in your home or business just <em>work</em>.
+          From a dripping faucet to a full AC install, from backflow testing to a commercial build-out, the
+          formula hasn't changed in nearly 50 years — answer the phone, show up, quote it straight, and stand
+          behind the work.
+        </p>
+      </div>
+      <dl class="stats">
+        <div class="stats__item"><dt>Since {BUSINESS.foundedYear}</dt><dd>serving Tampa Bay</dd></div>
+        <div class="stats__item"><dt>{BUSINESS.rating}★</dt><dd>{BUSINESS.reviewCount.toLocaleString()} reviews</dd></div>
+        <div class="stats__item"><dt>{BUSINESS.jobsLastYear}</dt><dd>jobs completed last year</dd></div>
+        <div class="stats__item"><dt>{BUSINESS.hoursLastYear}</dt><dd>hours worked last year</dd></div>
+      </dl>
+    </div>
+  </section>
+
+  <!-- LATEST POSTS -->
+  {posts.length > 0 && (
+    <section class="section" id="blog">
+      <div class="container">
+        <h2>From the blog</h2>
+        <div class="grid grid--3">
+          {posts.map((post) => (
+            <PostCard
+              href={`/blog/${post.id}`}
+              title={post.data.title}
+              description={post.data.description}
+              pubDate={post.data.pubDate}
+              image={post.data.heroImage}
+              imageAlt={post.data.heroImageAlt}
+              tags={post.data.tags}
+            />
+          ))}
+        </div>
+        <p><a href="/blog" class="btn btn--ghost">Read the blog →</a></p>
+      </div>
+    </section>
+  )}
+
+  <LeadForm heading="Ready when you are. Get a free quote today." />
+</BaseLayout>
+
+<style>
+  .hero { background: linear-gradient(135deg, #0b5cab 0%, #08427b 100%); color: #fff; padding: 4rem 0; }
+  .hero h1 { color: #fff; max-width: 18ch; }
+  .hero__sub { font-size: 1.2rem; max-width: 55ch; color: #dbe7f5; }
+  .hero__cta { display: flex; gap: 0.8rem; flex-wrap: wrap; margin: 1.4rem 0 0.8rem; }
+  .hero .btn--ghost { color: #fff; border-color: #fff; }
+  .hero .btn--ghost:hover { background: #fff; color: var(--brand-dark); }
+  .hero__trust { color: #bcd2ec; margin: 0; }
+  .svc-cols { display: grid; grid-template-columns: 1fr 1fr; gap: 2rem; }
+  .svc-list { list-style: none; padding: 0; }
+  .svc-list li { padding: 0.45rem 0; border-bottom: 1px solid var(--border); }
+  .stats { display: grid; grid-template-columns: repeat(4, 1fr); gap: 1.5rem; margin: 2rem 0 0; }
+  .stats__item { text-align: center; }
+  .stats dt { font-size: clamp(1.6rem, 4vw, 2.4rem); font-weight: 800; color: var(--brand-dark); line-height: 1.1; }
+  .stats dd { margin: 0.3rem 0 0; color: var(--muted); font-size: 0.95rem; }
+  @media (max-width: 720px) { .svc-cols { grid-template-columns: 1fr; } .stats { grid-template-columns: 1fr 1fr; } }
+</style>
